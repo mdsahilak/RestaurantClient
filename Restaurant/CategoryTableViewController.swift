@@ -20,15 +20,17 @@ class CategoryTableViewController: UITableViewController {
         
         //tableView.refreshControl = UIRefreshControl()
         //tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        self.navigationItem.title = "Loading..."
         
         MenuController.shared.fetchCategories { (categories) in
             // try to fetch data from server and update the UI
             if let categories = categories {
                 self.updateUI(with: categories)
+                self.navigationItem.title = "Menu"
             } else {
                 // otherwise load sample data
                 DispatchQueue.main.async {
-                    self.navigationItem.title = "Sample Menu"
+                    self.navigationItem.title = "Sample Menu Data"
                     self.categories = self.sampleCategories
                     self.tableView.reloadData()
                 }

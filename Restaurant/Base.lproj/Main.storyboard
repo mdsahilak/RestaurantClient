@@ -136,8 +136,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SpD-bO-WfL">
-                                <rect key="frame" x="16" y="691" width="343" height="30"/>
+                                <rect key="frame" x="16" y="663" width="343" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="Vx6-gV-ZZH"/>
+                                    <constraint firstAttribute="height" constant="50" id="nlt-Qw-3ZB"/>
+                                </constraints>
                                 <state key="normal" title="Add to Order">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -156,7 +160,7 @@
                             <constraint firstItem="SpD-bO-WfL" firstAttribute="leading" secondItem="ORM-l6-GVr" secondAttribute="leading" constant="16" id="Rhe-h3-RTK"/>
                             <constraint firstItem="1rK-by-Bg0" firstAttribute="top" secondItem="hJu-eP-Wvr" secondAttribute="bottom" constant="8" id="SuU-hv-jg7"/>
                             <constraint firstItem="dYT-r8-kRF" firstAttribute="leading" secondItem="ORM-l6-GVr" secondAttribute="leading" constant="16" id="WUw-YH-dAc"/>
-                            <constraint firstItem="ORM-l6-GVr" firstAttribute="bottom" secondItem="SpD-bO-WfL" secondAttribute="bottom" constant="8" id="Z3R-Qn-j1R"/>
+                            <constraint firstItem="ORM-l6-GVr" firstAttribute="bottom" secondItem="SpD-bO-WfL" secondAttribute="bottom" constant="16" id="Z3R-Qn-j1R"/>
                             <constraint firstItem="ORM-l6-GVr" firstAttribute="trailing" secondItem="dYT-r8-kRF" secondAttribute="trailing" constant="16" id="c0M-2K-tri"/>
                             <constraint firstItem="1rK-by-Bg0" firstAttribute="leading" secondItem="xx0-PA-IOp" secondAttribute="trailing" constant="8" id="fPJ-BP-j8h"/>
                             <constraint firstItem="ORM-l6-GVr" firstAttribute="trailing" secondItem="SpD-bO-WfL" secondAttribute="trailing" constant="16" id="gDC-tZ-U1b"/>
@@ -177,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Utw-mg-8Us" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2988" y="411"/>
+            <point key="canvasLocation" x="2988" y="410.83743842364532"/>
         </scene>
         <!--orderViewController-->
         <scene sceneID="pEs-a0-jY2">

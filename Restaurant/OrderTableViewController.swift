@@ -71,6 +71,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
     
     func uploadOrder() {
         let menuIds = menuItems.map { $0.id }
+        self.navigationItem.title = "Ordering... Pls wait!"
         MenuController.shared.submitOrder(menuIds: menuIds) { (minutes) in
             DispatchQueue.main.async {
                 if let minutes = minutes {
@@ -78,7 +79,10 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
                     self.performSegue(withIdentifier: "ConfirmationSegue", sender: nil)
                 } else {
                     let paymentErrorAlert = UIAlertController(title: "Payment Processing Error", message: "Your payment could not be processed. Please check your internet connection or try again later.", preferredStyle: .alert)
-                    paymentErrorAlert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
+                    paymentErrorAlert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { (action) in
+                        self.navigationItem.title = "Order"
+                    }))
+                    self.navigationItem.title = "Order Failed!"
                     self.present(paymentErrorAlert, animated: true, completion: nil)
                 }
             }
@@ -185,6 +189,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
             menuItems.removeAll()
             tableView.reloadData()
             updateBadgeNumber()
+            self.navigationItem.title = "Order"
         }
     }
 

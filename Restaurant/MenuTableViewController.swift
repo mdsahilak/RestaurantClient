@@ -23,10 +23,13 @@ class MenuTableViewController: UITableViewController {
         //tableView.refreshControl = UIRefreshControl()
         //tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
-        // try to fetch data from server and update the UI
+        self.navigationItem.title = "Loading..."
+        
         MenuController.shared.fetchMenuItems(categoryName: category) { (menuItems) in
+            // try to fetch data from server and update the UI
             if let menuItems = menuItems {
                 self.updateUI(with: menuItems)
+                self.navigationItem.title = "\(self.category.capitalized)"
             } else {
                 // otherwise load sample data
                 DispatchQueue.main.async {
