@@ -9,8 +9,6 @@
 import UIKit
 
 class CategoryTableViewController: UITableViewController {
-
-    let sampleCategories = ["Starters", "Entrees", "Desserts"]
     
     var categories: [String] = []
     
@@ -18,21 +16,18 @@ class CategoryTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.rowHeight = 101
         
-        //tableView.refreshControl = UIRefreshControl()
-        //tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
         self.navigationItem.title = "Loading..."
         
         MenuController.shared.fetchCategories { (categories) in
             // try to fetch data from server and update the UI
             if let categories = categories {
                 self.updateUI(with: categories)
-                self.navigationItem.title = "Menu"
             } else {
                 // otherwise load sample data
                 DispatchQueue.main.async {
-                    self.navigationItem.title = "Sample Menu Data"
-                    self.categories = self.sampleCategories
-                    self.tableView.reloadData()
+                    self.navigationItem.title = "Error"
                 }
             }
         }
@@ -46,6 +41,7 @@ class CategoryTableViewController: UITableViewController {
     
     func updateUI(with categories: [String]) {
         DispatchQueue.main.async {
+            self.navigationItem.title = "Menu"
             self.categories = categories
             self.tableView.reloadData()
         }
@@ -62,8 +58,7 @@ class CategoryTableViewController: UITableViewController {
             } else {
                 // otherwise load sample data
                 DispatchQueue.main.async {
-                    self.categories = self.sampleCategories
-                    self.navigationItem.title = "Sample Menu"
+                    self.navigationItem.title = "Error"
                     self.tableView.reloadData()
                     self.tableView.refreshControl?.endRefreshing()
                 }

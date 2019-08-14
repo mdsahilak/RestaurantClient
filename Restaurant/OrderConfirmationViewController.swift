@@ -10,15 +10,18 @@ import UIKit
 
 class OrderConfirmationViewController: UIViewController {
 
+    @IBOutlet weak var orderIDLabel: UILabel!
     @IBOutlet weak var timeRemainingLabel: UILabel!
-    var minutes: Int!
+    
+    var orderSuccessInfo: OrderSuccess!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        timeRemainingLabel.text = "Thank you for your order! your wait time is approximately \(minutes!) minutes."
+        orderIDLabel.text = "Order ID \n \(orderSuccessInfo.orderID!)"
+        timeRemainingLabel.text = "Thank you for you order. Your order will be ready in about \(orderSuccessInfo.prepTime) minutes."
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

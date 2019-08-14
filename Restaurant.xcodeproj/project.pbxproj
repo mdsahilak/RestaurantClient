@@ -19,6 +19,8 @@
 		E9B798F82141693D009CB279 /* intermediaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B798F72141693D009CB279 /* intermediaryModels.swift */; };
 		E9B798FA21416D73009CB279 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B798F921416D73009CB279 /* MenuController.swift */; };
 		E9B798FC214454BF009CB279 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B798FB214454BF009CB279 /* OrderConfirmationViewController.swift */; };
+		E9CE5B9E22BD51E0005FBA83 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CE5B9D22BD51E0005FBA83 /* Order.swift */; };
+		E9F3040F22D398710018E1EA /* HexToUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F3040E22D398710018E1EA /* HexToUIColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		E9B798F72141693D009CB279 /* intermediaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = intermediaryModels.swift; sourceTree = "<group>"; };
 		E9B798F921416D73009CB279 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		E9B798FB214454BF009CB279 /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
+		E9CE5B9D22BD51E0005FBA83 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		E9F3040E22D398710018E1EA /* HexToUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexToUIColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +73,9 @@
 			isa = PBXGroup;
 			children = (
 				E9B798DB2141487A009CB279 /* AppDelegate.swift */,
+				E9F3040E22D398710018E1EA /* HexToUIColor.swift */,
 				E9B798F521415B2F009CB279 /* MenuItem.swift */,
+				E9CE5B9D22BD51E0005FBA83 /* Order.swift */,
 				E9B798F72141693D009CB279 /* intermediaryModels.swift */,
 				E9B798F921416D73009CB279 /* MenuController.swift */,
 				E9B798DF2141487A009CB279 /* Main.storyboard */,
@@ -158,6 +164,8 @@
 			files = (
 				E9B798FA21416D73009CB279 /* MenuController.swift in Sources */,
 				E9B798F621415B2F009CB279 /* MenuItem.swift in Sources */,
+				E9F3040F22D398710018E1EA /* HexToUIColor.swift in Sources */,
+				E9CE5B9E22BD51E0005FBA83 /* Order.swift in Sources */,
 				E9B798F0214158F5009CB279 /* MenuTableViewController.swift in Sources */,
 				E9B798F221415903009CB279 /* OrderTableViewController.swift in Sources */,
 				E9B798F421415A65009CB279 /* ItemDetailViewController.swift in Sources */,
@@ -319,7 +327,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.MDAK.Restaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -338,7 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.MDAK.Restaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

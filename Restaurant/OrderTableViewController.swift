@@ -15,7 +15,7 @@ protocol AddToOrderDelegate {
 class OrderTableViewController: UITableViewController, AddToOrderDelegate {
 
     var menuItems = [MenuItem]()
-    var orderMinutes: Int?
+    var orderSucessData: OrderSuccess?
 
     @IBOutlet weak var submitButton: UIBarButtonItem!
     
@@ -55,27 +55,56 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
         (submitButton.isEnabled, editButtonItem.isEnabled) = menuItems.count > 0 ? (true,true) : (false,false)
     }
     
+    // Special code for enabling and disabling confirm button for table number alert
+    var action: UIAlertAction? = nil
+    var orderingEntityText: String? = nil
+    @objc func textChanged(_ textField: UITextField) {
+        //print("hoho")
+        guard let action = action else {return}
+        if let text = textField.text, !text.isEmpty {
+            orderingEntityText = text
+            action.isEnabled = true
+        } else {
+            action.isEnabled = false
+        }
+    }
+    
     @IBAction func submitTapped(_ sender: UIBarButtonItem) {
         let orderTotal = menuItems.reduce(0.0) { (result, menuItem) -> Double in
             return result + menuItem.price
         }
         let formattedOrder = String(format: "$%.2f", orderTotal)
         
-        let alert = UIAlertController(title: "Confirm Order", message: "You are about to submit your order worth a total of \(formattedOrder)", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { (action) in
+        let alert = UIAlertController(title: "Confirm Order", message: "You are about to submit your order worth a total of \(formattedOrder). Please enter ordering entity's identifier.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: { (action) in
             self.uploadOrder()
         }))
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Eg: Greg @Table 13"
+            textField.addTarget(self, action: #selector(self.textChanged(_:)), for: .editingChanged)
+        }
+        
+        //
+        alert.actions.first!.isEnabled = false
+        action = alert.actions.first!
+        
         present(alert, animated: true, completion: nil)
     }
     
     func uploadOrder() {
         let menuIds = menuItems.map { $0.id }
-        self.navigationItem.title = "Ordering... Pls wait!"
-        MenuController.shared.submitOrder(menuIds: menuIds) { (minutes) in
+        self.navigationItem.title = "Pls wait..."
+        
+        //
+        let order = Order(id: nil, orderingEntity: orderingEntityText ?? "X", orderedIds: menuIds)
+        MenuController.shared.submitOrder(order: order) { (orderSuccess) in
             DispatchQueue.main.async {
-                if let minutes = minutes {
-                    self.orderMinutes = minutes
+                if let orderSuccess = orderSuccess {
+                    self.orderSucessData = orderSuccess
                     self.performSegue(withIdentifier: "ConfirmationSegue", sender: nil)
                 } else {
                     let paymentErrorAlert = UIAlertController(title: "Payment Processing Error", message: "Your payment could not be processed. Please check your internet connection or try again later.", preferredStyle: .alert)
@@ -173,7 +202,7 @@ class OrderTableViewController: UITableViewController, AddToOrderDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ConfirmationSegue" {
             let orderConfirmationViewController = segue.destination as! OrderConfirmationViewController
-            orderConfirmationViewController.minutes = orderMinutes
+            orderConfirmationViewController.orderSuccessInfo = orderSucessData
         }
         if segue.identifier == "OrderItemDetailViewSegue" {
             let orderItemDetailViewController = segue.destination as! ItemDetailViewController

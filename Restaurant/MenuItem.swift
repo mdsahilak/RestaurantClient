@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MenuItem: Codable{
+struct MenuItem: Codable {
     var id: Int
     var name: String
     var description: String
@@ -16,15 +16,16 @@ struct MenuItem: Codable{
     var category: String
     var imageURL: URL
     
+    
     enum CodingKeys: String, CodingKey{
         case id
         case name
         case description
         case price
         case category
-        case imageURL = "image_url"
+        case imageURL //= "image_url" // not required when using vapor server
     }
-    
+   
 }
 
 struct MenuItems: Codable {

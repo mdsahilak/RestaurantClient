@@ -10,8 +10,6 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
 
-    let sampleMenuItems = [MenuItem(id: 100, name: "XX", description: "YOLO", price: 25, category: "Yo", imageURL: URL(string: "www.yo.com")!), MenuItem(id: 100, name: "XX", description: "YOLO", price: 25, category: "Yo", imageURL: URL(string: "www.yo.com")!), MenuItem(id: 100, name: "XX", description: "YOLO", price: 25, category: "Yo", imageURL: URL(string: "www.yo.com")!)]
-    
     var menuItems: [MenuItem] = []
     var category: String!
     
@@ -20,21 +18,16 @@ class MenuTableViewController: UITableViewController {
         title = category.capitalized
         tableView.rowHeight = 99
         
-        //tableView.refreshControl = UIRefreshControl()
-        //tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
         self.navigationItem.title = "Loading..."
         
         MenuController.shared.fetchMenuItems(categoryName: category) { (menuItems) in
             // try to fetch data from server and update the UI
             if let menuItems = menuItems {
                 self.updateUI(with: menuItems)
-                self.navigationItem.title = "\(self.category.capitalized)"
             } else {
                 // otherwise load sample data
                 DispatchQueue.main.async {
-                    self.menuItems = self.sampleMenuItems
-                    self.navigationItem.title = "Sample \(self.category.capitalized)"
+                    self.navigationItem.title = "Error"
                     self.tableView.reloadData()
                 }
             }
@@ -49,29 +42,10 @@ class MenuTableViewController: UITableViewController {
     
     func updateUI(with menuItems: [MenuItem]) {
         DispatchQueue.main.async {
+            self.navigationItem.title = "\(self.category.capitalized)"
             self.menuItems = menuItems
             self.tableView.reloadData()
         }
-    }
-    
-    @objc func refresh() {
-        MenuController.shared.fetchMenuItems(categoryName: category) { (menuItems) in
-            if let menuItems = menuItems {
-                self.updateUI(with: menuItems)
-                DispatchQueue.main.async {
-                    self.tableView.refreshControl?.endRefreshing()
-                }
-            } else {
-                // otherwise load sample data
-                DispatchQueue.main.async {
-                    self.menuItems = self.sampleMenuItems
-                    self.navigationItem.title = "Sample \(self.category.capitalized)"
-                    self.tableView.reloadData()
-                    self.tableView.refreshControl?.endRefreshing()
-                }
-            }
-        }
-        
     }
 
     override func didReceiveMemoryWarning() {

@@ -8,14 +8,16 @@
 
 import Foundation
 
-struct Categories: Codable{
+struct Categories: Codable {
     let categories: [String]
 }
 
-struct PreparationTime: Codable{
+struct OrderSuccess: Codable {
+    let orderID: UUID?
     let prepTime: Int
     
-    enum CodingKeys: String, CodingKey{
-        case prepTime = "preparation_time"
+    enum CodingKeys: String, CodingKey {
+        case orderID
+        case prepTime // "preparation_time" // not required for the vapor swift server
     }
 }
